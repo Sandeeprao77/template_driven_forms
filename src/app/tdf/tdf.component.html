@@ -1,0 +1,50 @@
+<div>
+  <h1>Registration form</h1>
+</div>
+
+<form #regForm="ngForm" (ngSubmit)="register(regForm)">
+  <div>
+    <div style="display: flex; padding: 10px">
+      <label style="width: 150px" for="">Fullname</label>
+      <input type="text" name="fullname" ngModel required #fullname="ngModel" minlength="3" />
+      <div *ngIf="fullname.invalid && fullname.touched">
+        <small *ngIf="fullname.errors?.['required']" style="color: red;">Fullname is required</small>
+        <small *ngIf="fullname.errors?.['minlength']" style="color: red;">Fullname Atleast 3 letters</small>
+
+      </div>
+    </div>
+    <div style="display: flex; padding: 10px">
+      <label style="width: 150px" for="">Mobile Number</label>
+      <input type="number" name="mobile" ngModel required #mobile="ngModel" minlength="10" maxlength="10"  />
+      <div  *ngIf="mobile.invalid && mobile.touched">
+        <small *ngIf="mobile.errors?.['required']">Mobile Number is required</small>
+        <small *ngIf="mobile.errors?.['minlength']" style="color: red;">Mobile number must be 10 numbers only</small>
+        <small *ngIf="mobile.errors?.['maxlength']" style="color: red;">Mobile number must be 10 numbers only</small>
+
+      </div>
+    </div>
+    <div style="display: flex; padding: 10px">
+      <label style="width: 150px" for="">Email</label>
+      <input type="email" name="email" ngModel required #email="ngModel" />
+      <div  *ngIf="email.invalid && email.touched">
+<small *ngIf="email.errors?.['required']" style="color: red;"></small>
+      </div>
+    </div>
+    <div style="display: flex; padding: 10px">
+      <label style="width: 150px" for="">Password</label>
+      <input type="password" name="Password" ngModel required #password="ngModel"  />
+    </div>
+    <div style="display: flex; padding: 10px">
+      <label style="width: 150px" for="">Gender</label>
+      <select name="gender" ngModel required #gender="ngModel" >
+        <option value="">--- select ---</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+
+    <div style="padding-left: 40px">
+      <button type="submit">Register</button>
+    </div>
+  </div>
+</form>
