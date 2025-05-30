@@ -1,57 +1,122 @@
-<div>
-  <h1>Registration form</h1>
-</div>
+<form
+  #regForm="ngForm"
+  (ngSubmit)="register(regForm)"
+  style=" padding-left: 25%">
 
-<form #regForm="ngForm" (ngSubmit)="register(regForm)">
+  <div>
+    <h1>Registration form</h1>
+  </div>
   <div>
     <div style="display: flex; padding: 10px">
-      <label style="width: 150px" for="">Fullname</label>
-      <input type="text" name="fullname" ngModel required #fullname="ngModel" minlength="3" />
+      <label style="width: 150px" for="fullname" [class.error-label]="fullname.invalid && fullname.touched"
+      >Fullname</label>
+      <input
+        type="text"
+        name="fullname"
+        ngModel
+        required
+        #fullname="ngModel"
+        minlength="3"
+        [class.invalid-input]="fullname.invalid && fullname.touched"
+         [class.valid-input]="fullname.valid && fullname.touched"
+      />
       <div *ngIf="fullname.invalid && fullname.touched">
-        <small *ngIf="fullname.errors?.['required']" style="color: red;">Fullname is required</small>
-        <small *ngIf="fullname.errors?.['minlength']" style="color: red;">Fullname Atleast 3 letters</small>
+        <small *ngIf="fullname.errors?.['required']" style="color: red"
+          >Fullname is required</small
+        >
+        <small *ngIf="fullname.errors?.['minlength']" style="color: red" class="error-msg"
+          >Fullname Atleast 3 letters</small
+        >
+      </div>
+    </div>
 
+    
+    <div style="display: flex; padding: 10px">
+      <label style="width: 150px" for="mobile" [class.error-label]="mobile.invalid && mobile.touched">Mobile Number</label>
+      <input
+        type="text"
+        name="mobile"
+        ngModel
+        #mobile="ngModel"
+        required
+        minlength="10"
+        maxlength="10"
+        pattern="^[0-9]{10}$"
+        [class.invalid-input]="mobile.invalid && mobile.touched"
+         [class.valid-input]="mobile.valid && mobile.touched"
+      />
+      <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
+        <small *ngIf="mobile.errors?.['required']" style="color: red" class="error-msg"
+          >Mobile Number is required</small
+        >
+        <small *ngIf="mobile.errors?.['minlength']" style="color: red"  class="error-msg"
+          >Mobile number must be 10 numbers only</small
+        >
+        <small *ngIf="mobile.errors?.['maxlength']" style="color: red"  class="error-msg"
+          >Mobile number must be 10 numbers only</small
+        >
+        <small *ngIf="mobile.errors?.['pattern']" style="color: red"  class="error-msg"
+          >Enter a valid 10-digit mobile number starting with 6, 7, 8, or
+          9.</small
+        >
       </div>
     </div>
     <div style="display: flex; padding: 10px">
-      <label style="width: 150px" for="">Mobile Number</label>
-      <input type="text" name="mobile" ngModel #mobile="ngModel"  required minlength="10" maxlength="10"
-      pattern="^[0-9]{10}$" />
-      <div  *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)">
-        <small *ngIf="mobile.errors?.['required']" style="color:red">Mobile Number is required</small>
-        <small *ngIf="mobile.errors?.['minlength']" style="color: red;">Mobile number must be 10 numbers only</small>
-        <small *ngIf="mobile.errors?.['maxlength']" style="color: red;">Mobile number must be 10 numbers only</small>
-        <small *ngIf="mobile.errors?.['pattern']" style="color: red;">Enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.</small>
-
+      <label style="width: 150px" for="email" [class.error-label]="email.invalid && email.touched" >Email</label>
+      <input
+        type="email"
+        name="email"
+        ngModel
+        required
+        #email="ngModel"
+        required
+        email
+        [class.invalid-input]="email.invalid && email.touched"
+         [class.valid-input]="email.valid && email.touched"
+      />
+      <div *ngIf="email.invalid && email.touched">
+        <small *ngIf="email.errors?.['required']" style="color: red"  class="error-msg"
+          >Email is Required</small
+        >
+        <small *ngIf="email.errors?.['email']" style="color: red"  class="error-msg"
+          >Enter valid Email</small
+        >
       </div>
     </div>
     <div style="display: flex; padding: 10px">
-      <label style="width: 150px" for="">Email</label>
-      <input type="email" name="email" ngModel required #email="ngModel"  required email/>
-      <div  *ngIf="email.invalid && email.touched">
-       <small *ngIf="email.errors?.['required']" style="color: red;">Email is Required</small>
-       <small *ngIf="email.errors?.['email']" style="color:red">Enter valid Email</small>
-      </div>
-    </div>
-    <div style="display: flex; padding: 10px">
-      <label style="width: 150px" for="">Password</label>
-      <input type="password" name="Password" ngModel required #password="ngModel" minlength="8"/>  
+      <label style="width: 150px" for="password" [class.error-label]="password.invalid && password.touched">Password</label>
+      <input
+        type="password"
+        name="Password"
+        ngModel
+        required
+        #password="ngModel"
+        minlength="8"
+        [class.invalid-input]="password.invalid && password.touched"
+         [class.valid-input]="password.valid && password.touched"
+        
+      />
       <div *ngIf="password.invalid && password.touched">
-        <small *ngIf="password.errors?.['required']" style="color:red">Password is required</small>
-        <small *ngIf="password.errors?.['minlength']" style="color: red;">Password must be atleast 8 characters & Must contain 1 uppercase letter and 1 number.</small>
-       
+        <small *ngIf="password.errors?.['required']" style="color: red"  class="error-msg"
+          >Password is required</small
+        >
+        <small *ngIf="password.errors?.['minlength']" style="color: red"  class="error-msg"
+          >Password must be atleast 8 characters & Must contain 1 uppercase
+          letter and 1 number.</small
+        >
       </div>
     </div>
     <div style="display: flex; padding: 10px">
-      <label style="width: 150px" for="">Gender</label>
-      <select name="gender" ngModel required #gender="ngModel" >
-
+      <label style="width: 150px" for="gender" [class.error-label]="gender.invalid && gender.touched">Gender</label>
+      <select name="gender" ngModel required #gender="ngModel" [class.invalid-input]="gender.invalid && gender.touched"  [class.valid-input]="gender.valid && gender.touched">
         <option value="">--- select ---</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
       <div *ngIf="gender.invalid && gender.touched" required gender>
-        <small *ngIf="gender.errors?.['required']" style="color: red;">Gender Required</small>
+        <small *ngIf="gender.errors?.['required']" style="color: red"  class="error-msg"
+          >Gender Required</small
+        >
       </div>
     </div>
 
