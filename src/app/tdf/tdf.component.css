@@ -24,6 +24,10 @@
   color: red;
   font-size: 0.9em;
 }
-.buttons .reg-btn {
-  margin-right: 10px;
+.reg-btn {
+  margin-left: 90px;
+  
+  
+  margin-top: 20px;
 }
+
